@@ -1,0 +1,287 @@
+@charset "utf-8";
+
+/********** Global **********/
+#app,
+html,
+body {
+    width: 100%;
+    height: 100%;
+    font-family: "microsoft yahei", arial, sans-serif;
+    background-color: #0b0f34;
+    overflow-x: hidden;
+    overflow-y: auto;
+}
+
+body {
+    margin: 0 auto;
+    width: 100%;
+    height: 100%;
+}
+
+/********** Layout **********/
+
+#app{
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    color: #fff;
+    background-color: #0B0725;
+}
+
+.header {
+    position: relative;
+    height: 2.625rem;
+    box-sizing: border-box;
+    background: url("~@/assets/imgs/header_bar.png") no-repeat;
+    background-size: 100% 100%;
+    box-sizing: border-box;
+}
+
+.header-title {
+    margin: 0;
+    padding: 0;
+    text-align: center;
+    font-size: 1.8rem;
+    font-weight: 400;
+}
+
+.wrapper {
+    position: absolute;
+    top: 2rem;
+    bottom: .5rem;
+    left: .5rem;
+    right: .5rem;
+    background-size: 100% 100%;
+    box-sizing: border-box;
+}
+
+/* PC */
+@media (max-width:1919px) {
+    .header {
+        height: 2.25rem;
+    }
+    .header-title {
+        line-height: 2.625rem;
+        font-size: 1.375rem;
+    }
+    .wrapper {
+        top: 1.375rem;
+    }
+}
+
+/* Mobile */
+@media (max-width:1279px) {
+    .header-title {
+        max-width: 96%;
+    }
+
+    .wrapper {
+        background: none;
+    }
+}
+
+/********** Content **********/
+.content {
+    display: -webkit-flex;
+    display: -ms-flexbox;
+    display: flex;
+    padding: 1.5625rem .9375rem;
+    height: 100%;
+    min-height: 100%;
+    box-sizing: border-box;
+}
+
+.col {
+    margin: 0 .625rem;
+    height: 100%;
+}
+
+.col-l {
+    -webkit-flex: 2;
+    -ms-flex: 2;
+    flex: 2
+}
+
+.col-c {
+    -webkit-flex: 3;
+    -ms-flex: 3;
+    flex: 3;
+}
+
+.col-r {
+    -webkit-flex: 2;
+    -ms-flex: 2;
+    flex: 2;
+}
+
+/* PC */
+@media (max-width:1919px) {
+    .content {
+        padding: .3125rem 0;
+    }
+}
+
+/* Mobile */
+@media (max-width:1279px) {
+    .content {
+        -webkit-flex-direction: column;
+        -ms-flex-direction: column;
+        flex-direction: column;
+    }
+
+    .col {
+        margin: .3125rem 0;
+    }
+
+    .col-l,
+    .col-c,
+    .col-r {
+        -webkit-flex: none;
+        -ms-flex: none;
+        flex: none;
+    }
+}
+
+.xpanel-wrapper {
+    padding-bottom: .625rem;
+    box-sizing: border-box;
+}
+
+.xpanel-wrapper {
+    height: 100%;
+}
+
+.xpanel-wrapper-25 {
+    height: 25%;
+}
+
+.xpanel-wrapper-30 {
+    height: 30%;
+}
+
+.xpanel-wrapper-35 {
+    height: 35%;
+}
+
+.xpanel-wrapper-40 {
+    height: 40%;
+}
+
+.xpanel-wrapper-50 {
+    height: 50%
+}
+
+.xpanel-wrapper-40 {
+    height: 40%;
+}
+
+.xpanel-wrapper-45 {
+    height: 45%;
+}
+
+.xpanel-wrapper-60 {
+    height: 60%;
+}
+
+.xpanel-wrapper-75 {
+    height: 75%;
+}
+
+.xpanel {
+    height: 100%;
+    min-height: 6.25rem;
+    background-repeat: no-repeat;
+    background-size: 100% 100%;
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: column;
+}
+
+.xpanel-l-t {
+    background-image: url("~@/assets/imgs/panel-l-t.png");
+}
+
+.xpanel-l-b {
+    background-image: url("~@/assets/imgs/panel-l-b.png");
+}
+
+.xpanel-c-b {
+    background-image: url("~@/assets/imgs/panel-c-b.png");
+}
+
+.xpanel-r-t {
+    background-image: url("~@/assets/imgs/panel-r-t.png");
+}
+
+.xpanel-r-m {
+    background-image: url("~@/assets/imgs/panel-r-m.png");
+}
+
+.xpanel-r-b {
+    background-image: url("~@/assets/imgs/panel-r-b.png");
+}
+
+.xpanel .title {
+    padding-left: 1.42rem;
+    height: 2.75rem;
+    line-height: 2.75rem;
+    font-size: 0.92rem;
+    font-weight: normal;
+    color: #fff;
+    background-image: url("~@/assets/imgs/title-bg.png");
+    background-repeat: no-repeat;
+    background-size: 100% 100%;
+}
+
+.xpanel .title-long {
+    background-image: url("~@/assets/imgs/title-bg-long.png");
+}
+
+/* PC */
+@media (max-width:1919px) {
+    .xpanel .title {
+        padding-left: 1.42rem;
+        height: 2.25rem;
+        line-height: 2.25rem;
+        font-size: 0.92rem;
+    }
+}
+
+/* tool */
+.fill-h {
+    height: 100% !important;
+    min-height: 100% !important;
+}
+
+.no-margin {
+    margin: 0 !important;
+}
+
+.no-padding {
+    padding: 0 !important;
+}
+
+.no-bg {
+    background: none !important;
+}
+
+.no-border {
+    border: 0 !important;
+}
+
+/* scrollbar */
+::-webkit-scrollbar {
+    width: 0;
+    height: 0;
+}
+
+::-webkit-scrollbar-track {
+    background-color: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+    border-radius: 4px;
+    background-color: rgba(0, 0, 0, 0.3);
+}
