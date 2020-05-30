@@ -11,6 +11,7 @@
     "core-js": "^3.6.4",
     "echarts": "^4.3.0",
     "echarts-liquidfill": "^2.0.5",
+    "throttle-debounce": "^2.1.0",
     "topevery-element-ui": "0.0.24",
     "vue": "^2.6.11"
   },

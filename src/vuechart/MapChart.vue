@@ -1,8 +1,10 @@
 <template>
   <div class="MapChart">
     <cube-chart
+      ref="map"
       style="width: 100%;height: 100%;"
       autoresize
+      @ready="ready"
       :options="chartOptions"
     />
   </div>
@@ -303,7 +305,6 @@ export default {
       // barData.push(data[i].value)
       // sum += data[i].value
     }
-
     this.chartOptions = {
       backgroundColor: '',
       animation: true,
@@ -325,11 +326,13 @@ export default {
         roam: false,
         itemStyle: {
           normal: {
-            areaColor: '#023677',
-            borderColor: '#1180c7'
+            areaColor: '#3a7fd5',
+            borderColor: '#0a53e9', // 线
+            shadowColor: '#092f8f', // 外发光
+            shadowBlur: 20
           },
           emphasis: {
-            areaColor: '#4499d0'
+            areaColor: '#0a2dae' // 悬浮区背景
           }
         }
       },
@@ -352,7 +355,7 @@ export default {
       },
       series: [
         {
-          name: '散点',
+          name: '设备量',
           type: 'scatter',
           coordinateSystem: 'geo',
           data: convertData(data),
@@ -383,10 +386,10 @@ export default {
           symbolSize: function (val) {
             // return Math.max(val[2] / 10,9);
             if (val[2] < 10) {
-              return 7
+              return 6
             }
             if (val[2] >= 10 && val[2] < 100) {
-              return 12
+              return 10
             }
             if (val[2] >= 100) {
               return val[2] / 10
@@ -407,7 +410,7 @@ export default {
           itemStyle: {
             normal: {
               color: '#f4e925',
-              shadowBlur: 6,
+              shadowBlur: 4,
               shadowColor: '#333'
             }
           },
@@ -423,6 +426,54 @@ export default {
             }
           }
         }]
+    }
+  },
+  beforeDestroy () {
+    if (this.chart) {
+      this.chart.dispose()
+      this.chart = null
+    }
+  },
+
+  methods: {
+    ready (chart) {
+      this.chart = chart
+      this.chart.on('click', (e) => this.clickChart(e))
+      this.setIntervalChart()
+    },
+    clickChart (params) {
+      console.log(params)
+    },
+    setIntervalChart () {
+      this.$nextTick().then(_ => {
+        let dataIndex = -1
+        const pie = this.$refs.map
+        const dataLen = pie.options.series[0].data.length
+        setInterval(() => {
+          pie.dispatchAction({
+            type: 'downplay',
+            seriesIndex: 0,
+            dataIndex
+          })
+          dataIndex = (dataIndex + 1) % dataLen
+          pie.dispatchAction({
+            type: 'highlight',
+            seriesIndex: 0,
+            dataIndex
+          })
+          pie.dispatchAction({
+            type: 'mapSelect',
+            seriesIndex: 0,
+            dataIndex
+          })
+          // 显示 tooltip
+          pie.dispatchAction({
+            type: 'showTip',
+            seriesIndex: 0,
+            dataIndex
+          })
+        }, 4000)
+      })
     }
   }
 }
