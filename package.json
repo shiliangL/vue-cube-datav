@@ -12,7 +12,7 @@
     "echarts": "^4.3.0",
     "echarts-liquidfill": "^2.0.5",
     "throttle-debounce": "^2.1.0",
-    "topevery-element-ui": "0.0.24",
+    "topevery-element-ui": "0.0.29",
     "vue": "^2.6.11"
   },
   "devDependencies": {

@@ -1,7 +1,7 @@
 /*
  * @Author: shiliangL
  * @Date: 2020-05-23 22:04:03
- * @LastEditTime: 2020-05-23 22:49:38
+ * @LastEditTime: 2020-06-01 18:18:54
  * @LastEditors: Do not edit
  * @Description:
  * @FilePath: /vue-screen/babel.config.js
