@@ -1,0 +1,200 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>json-query</title>
+    <script type="text/javascript">
+        var json = [{
+            "MenuCode": "S0-3100-00",
+            "MenuAction": "TelPay",
+            "MenuName": "通讯费",
+            "subMenu": [{
+                "MenuCode": "S0-3100-01",
+                "MenuAction": "ChinaMobileTelBalQryInitAct",
+                "MenuName": "中国移动"
+            }, {
+                "MenuCode": "S0-3100-02",
+                "MenuAction": "UnicomTelBalQryInitAct",
+                "MenuName": "中国联通"
+            }, {
+                "MenuCode": "S0-3100-03",
+                "MenuAction": "TelecomTelBalQryInitAct",
+                "MenuName": "中国电信"
+            }]
+        }, {
+            "MenuCode": "S0-3200-00",
+            "MenuAction": "PowerPayInitAct",
+            "MenuName": "电费",
+            "subMenu": [{
+                "MenuCode": "S0-3210-00",
+                "MenuAction": "SmartPowerCardInitAct",
+                "MenuName": "智能电能表充值",
+                "subMenu": [{
+                    "MenuCode": "S0-3210-01",
+                    "MenuAction": "SmartPowerCardPayInitAct",
+                    "MenuName": "购电卡充值"
+                }, {
+                    "MenuCode": "S0-3210-02",
+                    "MenuAction": "SmartPowerCardQueryInitAct",
+                    "MenuName": "购电卡查询"
+                }, {
+                    "MenuCode": "S0-3210-03",
+                    "MenuAction": "SmartPowerCardRewriteInitAct",
+                    "MenuName": "购电卡补写"
+                }]
+            }, {
+                "MenuCode": "S0-3220-00",
+                "MenuAction": "ElectricChargeInitAct",
+                "MenuName": "电能表无卡充值",
+                "subMenu": [{
+                    "MenuCode": "S0-3220-01",
+                    "MenuAction": "ElectricChargeQryInitAct",
+                    "MenuName": "购电充值"
+                }, {
+                    "MenuCode": "S0-3220-02",
+                    "MenuAction": "ElectricChargeMsgRegInitAct",
+                    "MenuName": "短信订阅"
+                }]
+            }]
+        }, {
+            "MenuCode": "S0-3300-00",
+            "MenuAction": "HeatingPayInitAct",
+            "MenuName": "取暖费",
+            "subMenu": [{
+                "MenuCode": "S0-3300-04",
+                "MenuAction": "JinNengHeatingQryInitAct",
+                "MenuName": "天津能源缴费"
+            }]
+        }, {
+            "MenuCode": "S0-3400-00",
+            "MenuAction": "CablePayInitAct",
+            "MenuName": "有线电视费",
+            "subMenu": [{
+                "MenuCode": "S0-3400-01",
+                "MenuAction": "GuangDianCableQryInitAct",
+                "MenuName": "广电有线缴费"
+            }, {
+                "MenuCode": "S0-3400-02",
+                "MenuAction": "TedaCableQryInitAct",
+                "MenuName": "泰达有线缴费"
+            }]
+        }, {
+            "MenuCode": "S0-3000-01",
+            "MenuAction": "ETCLoadInitAct",
+            "MenuName": "ETC卡充值"
+        }, {
+            "MenuCode": "S0-3500-00",
+            "MenuAction": "WaterPayInitAct",
+            "MenuName": "水费",
+            "subMenu": [{
+                "MenuCode": "S0-3500-01",
+                "MenuAction": "JinNanWaterQryInitAct",
+                "MenuName": "津南水费缴费"
+            }]
+        }, {
+            "MenuCode": "S0-3000-03",
+            "MenuAction": "GasPayInitAct",
+            "MenuName": "燃气费"
+        }, {
+            "MenuCode": "S0-3000-04",
+            "MenuAction": "CommonPayInitAct",
+            "MenuName": "通用缴费"
+        }, {
+            "MenuCode": "S0-3600-00",
+            "MenuAction": "CityCardInitAct",
+            "MenuName": "城市一卡通充值",
+            "subMenu": [{
+                "MenuCode": "S0-3600-01",
+                "MenuAction": "CityCardPayInitAct",
+                "MenuName": "城市卡充值"
+            }, {
+                "MenuCode": "S0-3600-02",
+                "MenuAction": "CityCardRewriteInitAct",
+                "MenuName": "城市卡补写卡"
+            }]
+        }, {
+            "MenuCode": "S0-3000-05",
+            "MenuAction": "SocialSecurityQryInitAct",
+            "MenuName": "社保缴费"
+        }];
+    </script>
+
+    <script type="text/javascript">
+        /**
+         * Author ： 落雨
+         * 递归查询JSON树 父子节点
+         */
+        var parentNode = null;
+        var node = null;
+
+        /**
+         * 根据NodeID查找当前节点以及父节点
+         *
+         * @param  {[type]}
+         * @param  {[type]}
+         * @return {[type]}
+         */
+        function getNode(json, nodeId) {
+
+            //1.第一层 root 深度遍历整个JSON
+            for (var i = 0; i < json.length; i++) {
+                if (node) {
+                    break;
+                }
+                var obj = json[i];
+                //没有就下一个
+                if (!obj || !obj.MenuCode) {
+                    continue;
+                }
+
+                //2.有节点就开始找，一直递归下去
+                if (obj.MenuCode == nodeId) {
+                    //找到了与nodeId匹配的节点，结束递归
+                    node = obj;
+                    break;
+                } else {
+                    //3.如果有子节点就开始找
+                    if (obj.subMenu) {
+                        //4.递归前，记录当前节点，作为parent 父亲
+                        parentNode = obj;
+                        //递归往下找
+                        getNode(obj.subMenu, nodeId);
+                    } else {
+                        //跳出当前递归，返回上层递归
+                        continue;
+                    }
+                }
+            }
+
+            //5.如果木有找到父节点，置为null，因为没有父亲
+            if (!node) {
+                parentNode = null;
+            }
+
+            //6.返回结果obj
+            return {
+                parentNode: parentNode,
+                node: node
+            };
+        }
+
+        //批量查询
+        var query = [
+            'S0-3400-00', 'S0-3100-03', 'S0-3210-02', 'S0-3210-03', 'S0-3000-05', 'S0-3300-04'
+        ];
+
+        //打印结果
+        for (var i = 0; i < query.length; i++) {
+            node = null;
+            parentNode = null;
+            var obj = getNode(json, query[i]);
+            console.log("查询nodeId:" + query[i] + ", 结果:" + obj.node.MenuCode + ",name:" + obj.node.MenuName + " -> 父级:" + (obj.parentNode ? obj.parentNode.MenuName : '木有父级!'));
+        }
+    </script>
+</head>
+
+<body>
+</body>
+
+</html>

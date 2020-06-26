@@ -1,7 +1,7 @@
 <!--
  * @Author: shiliangL
  * @Date: 2020-05-23 22:04:03
- * @LastEditTime: 2020-06-02 09:44:21
+ * @LastEditTime: 2020-06-26 13:00:12
  * @LastEditors: Do not edit
  * @Description:
  * @FilePath: /vue-screen/src/App.vue
@@ -14,7 +14,6 @@
     <div class="wrapper">
       <div class="content">
         <div class="col col-l">
-
           <div class="xpanel-wrapper xpanel-wrapper-40">
             <div class="xpanel xpanel-r-t">
               <div class="title"> 人员作业情况 </div>
