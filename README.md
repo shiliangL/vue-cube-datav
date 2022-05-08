@@ -1,25 +1,13 @@
-# vue-screen
+<!--
+ * @Author: shiliangL
+ * @Date: 2021-06-11 20:35:17
+ * @LastEditTime: 2022-05-08 11:31:36
+ * @LastEditors: Do not edit
+ * @Description: 
+-->
 
-## Project setup
-```
-npm install
-```
+![image.png](./screenshot.png)
 
-### Compiles and hot-reloads for development
-```
-npm run serve
-```
+<!-- ### api接口
 
-### Compiles and minifies for production
-```
-npm run build
-```
-
-### Lints and fixes files
-```
-npm run lint
-```
-
-### Customize configuration
-See [Configuration Reference](https://cli.vuejs.org/config/).
-# vue-screen
+https://interface.sina.cn/news/wap/fymap2020_data.d.json -->
