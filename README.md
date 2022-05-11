@@ -6,7 +6,7 @@
  * @Description: 
 -->
 
-![image.png](screenshot.png)
+![image.png](./screenshot.png)
 
 <!-- ### api接口
 
